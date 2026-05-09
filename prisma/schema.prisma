@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Sticker {
+  id         String   @id @default(cuid())
+  code       String   @unique
+  name       String?
+  isSpecial  Boolean  @default(false)
+  sortOrder  Int
+
+  userStickers UserSticker[]
+}
+
+model UserSticker {
+  id             String  @id @default(cuid())
+  userId         String
+  stickerId      String
+  ownedCount     Int     @default(0)
+  duplicateCount Int     @default(0)
+  sticker        Sticker @relation(fields: [stickerId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stickerId])
+  @@index([userId])
+}
