@@ -33,6 +33,8 @@ app.get("/v1/stickers", async (_req, reply) => {
       code: true,
       name: true,
       isSpecial: true,
+      stickerKind: true,
+      nationCode: true,
       sortOrder: true,
     },
   });
@@ -47,7 +49,15 @@ app.get("/v1/me/collection", async (request, reply) => {
     where: { userId },
     include: {
       sticker: {
-        select: { id: true, code: true, name: true, isSpecial: true, sortOrder: true },
+        select: {
+          id: true,
+          code: true,
+          name: true,
+          isSpecial: true,
+          stickerKind: true,
+          nationCode: true,
+          sortOrder: true,
+        },
       },
     },
     orderBy: { sticker: { sortOrder: "asc" } },
@@ -89,7 +99,15 @@ app.patch<{ Params: { stickerId: string }; Body: unknown }>(
       update: { ownedCount, duplicateCount },
       include: {
         sticker: {
-          select: { id: true, code: true, name: true, isSpecial: true, sortOrder: true },
+          select: {
+            id: true,
+            code: true,
+            name: true,
+            isSpecial: true,
+            stickerKind: true,
+            nationCode: true,
+            sortOrder: true,
+          },
         },
       },
     });

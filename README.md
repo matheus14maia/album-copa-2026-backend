@@ -47,7 +47,7 @@ A API ficará em **http://localhost:4000**. O frontend local (`http://localhost:
 1. Suba um PostgreSQL acessível e defina `DATABASE_URL` no `.env` desta pasta.
 2. `npm install`
 3. `npx prisma migrate dev` (ou `npx prisma migrate deploy` se for só aplicar migrations existentes).
-4. `npx prisma db seed` (uma vez, para criar as ~980 figurinhas).
+4. `npx prisma db seed` (uma vez, para criar as ~994 figurinhas do catálogo oficial: FWC, seleções × 20 e Coca-Cola). Rodar o seed **apaga** figurinhas e coleções (`UserSticker`) existentes — em produção só execute quando aceitar esse reset.
 5. `npm run dev` — servidor em modo watch em `http://localhost:4000`.
 
 ## Scripts npm
@@ -64,7 +64,7 @@ A API ficará em **http://localhost:4000**. O frontend local (`http://localhost:
 | Método | Caminho | Auth | Descrição |
 |--------|---------|------|-----------|
 | `GET` | `/health` | Não | Health check. |
-| `GET` | `/v1/stickers` | Não | Catálogo de figurinhas. |
+| `GET` | `/v1/stickers` | Não | Catálogo de figurinhas (códigos alfanuméricos: `FWC 0`…`FWC 19`, `{SIGLA}1`…`{SIGLA}20`, `CC1`…`CC14`). |
 | `GET` | `/v1/me/collection` | Sim | Coleção do usuário. |
 | `PATCH` | `/v1/me/collection/:stickerId` | Sim | Corpo JSON `{ "ownedCount": number }`. Atualiza repetidas derivadas. |
 | `GET` | `/v1/me/stream` | Sim | SSE (reconexão com backoff no cliente). |

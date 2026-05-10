@@ -7,12 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum StickerKind {
+  FWC
+  COCA_COLA
+  NATION
+}
+
 model Sticker {
-  id         String   @id @default(cuid())
-  code       String   @unique
-  name       String?
-  isSpecial  Boolean  @default(false)
-  sortOrder  Int
+  id          String      @id @default(cuid())
+  code        String      @unique
+  name        String?
+  isSpecial   Boolean     @default(false)
+  stickerKind StickerKind @default(NATION)
+  nationCode  String?
+  sortOrder   Int
 
   userStickers UserSticker[]
 }

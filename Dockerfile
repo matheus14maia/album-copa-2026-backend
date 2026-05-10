@@ -2,13 +2,12 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install
-
 COPY prisma ./prisma
+RUN npm install
 COPY tsconfig.json ./
 COPY src ./src
 
-RUN npx prisma generate && npm run build
+RUN npm run build
 
 ENV NODE_ENV=production
 EXPOSE 4000
